@@ -12,7 +12,9 @@ import 'package:internet_connection_checker/internet_connection_checker.dart'
 import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
 import '../../data/core/utils/configuration.dart' as _i3;
-import 'injectable_module.dart' as _i7;
+import '../../data/weather/data_sources/remote/weather_remote_data_source.dart'
+    as _i7;
+import 'injectable_module.dart' as _i8;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
@@ -33,7 +35,10 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.lazySingletonAsync<_i6.SharedPreferences>(
       () => injectableModule.sharedPref,
       preResolve: true);
+  gh.lazySingleton<_i7.WeatherRemoteDataSource>(() =>
+      _i7.WeatherRemoteDataSourceImpl(
+          get<_i4.Dio>(), get<_i3.Configuration>()));
   return get;
 }
 
-class _$InjectableModule extends _i7.InjectableModule {}
+class _$InjectableModule extends _i8.InjectableModule {}
