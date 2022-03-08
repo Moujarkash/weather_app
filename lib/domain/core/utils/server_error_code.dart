@@ -1,0 +1,4 @@
+enum ServerErrorCode {
+  serverError,
+  noInternetConnection,
+}
