@@ -1,7 +1,9 @@
+import 'package:weather_app/domain/weather/entities/weather_condition.dart';
+
 class WeatherDetails {
-  final String main;
+  final WeatherCondition weatherCondition;
   final String description;
   final String icon;
 
-  WeatherDetails(this.main, this.description, this.icon);
+  WeatherDetails(this.weatherCondition, this.description, this.icon);
 }

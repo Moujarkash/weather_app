@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/domain/weather/entities/weather_details.dart';
+import 'package:weather_app/presentation/core/extensions/string_extensions.dart';
 
 typedef OnTap = void Function();
 
@@ -21,12 +22,13 @@ class WeatherListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(weatherDetails.main),
+        tileColor: Theme.of(context).backgroundColor.withOpacity(0.5),
+        title: Text(weatherDetails.weatherCondition.name.capitalize()),
         isThreeLine: true,
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(weatherDetails.description),
+            Text(weatherDetails.description.capitalize()),
             const SizedBox(
               height: 4,
             ),

@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/config/routing/app_router.dart';
 
@@ -9,6 +12,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _statusBarConfig();
+
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -33,15 +38,20 @@ class App extends StatelessWidget {
             behavior: const ScrollBehavior().copyWith(
               physics: const BouncingScrollPhysics(),
             ),
-            child: SafeArea(
-              top: false,
-              left: false,
-              right: false,
-              child: widget,
-            ),
+            child: widget,
           ),
         );
       },
     );
+  }
+
+  void _statusBarConfig() {
+    // make status bar for android the same behavior as IOS
+    // solid color with dark icons.
+    if (Platform.isAndroid) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark));
+    }
   }
 }
