@@ -9,18 +9,19 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i5;
-import 'package:shared_preferences/shared_preferences.dart' as _i8;
+import 'package:logger/logger.dart' as _i6;
+import 'package:shared_preferences/shared_preferences.dart' as _i9;
 
-import '../../application/weather/weather_data/weather_data_bloc.dart' as _i13;
+import '../../application/weather/weather_data/weather_data_bloc.dart' as _i14;
 import '../../data/core/utils/configuration.dart' as _i3;
-import '../../data/core/utils/network_info_impl.dart' as _i7;
+import '../../data/core/utils/network_info_impl.dart' as _i8;
 import '../../data/weather/data_sources/remote/weather_remote_data_source.dart'
-    as _i9;
-import '../../data/weather/repositories/weather_repository_impl.dart' as _i11;
-import '../../domain/core/utils/network_info.dart' as _i6;
-import '../../domain/weather/repositories/weather_repository.dart' as _i10;
-import '../../domain/weather/use_cases/get_weather_data_use_case.dart' as _i12;
-import 'injectable_module.dart' as _i14;
+    as _i10;
+import '../../data/weather/repositories/weather_repository_impl.dart' as _i12;
+import '../../domain/core/utils/network_info.dart' as _i7;
+import '../../domain/weather/repositories/weather_repository.dart' as _i11;
+import '../../domain/weather/use_cases/get_weather_data_use_case.dart' as _i13;
+import 'injectable_module.dart' as _i15;
 
 const String _dev = 'dev';
 const String _prod = 'prod';
@@ -38,23 +39,25 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.lazySingleton<_i4.Dio>(() => injectableModule.dioInstance);
   gh.lazySingleton<_i5.InternetConnectionChecker>(
       () => injectableModule.connectionChecker);
-  gh.lazySingleton<_i6.NetworkInfo>(
-      () => _i7.NetworkInfoImpl(get<_i5.InternetConnectionChecker>()));
-  await gh.lazySingletonAsync<_i8.SharedPreferences>(
+  gh.lazySingleton<_i6.Logger>(() => injectableModule.logger);
+  gh.lazySingleton<_i7.NetworkInfo>(
+      () => _i8.NetworkInfoImpl(get<_i5.InternetConnectionChecker>()));
+  await gh.lazySingletonAsync<_i9.SharedPreferences>(
       () => injectableModule.sharedPref,
       preResolve: true);
-  gh.lazySingleton<_i9.WeatherRemoteDataSource>(() =>
-      _i9.WeatherRemoteDataSourceImpl(
+  gh.lazySingleton<_i10.WeatherRemoteDataSource>(() =>
+      _i10.WeatherRemoteDataSourceImpl(
           get<_i4.Dio>(), get<_i3.Configuration>()));
-  gh.lazySingleton<_i10.WeatherRepository>(() => _i11.WeatherRepositoryImpl(
-      get<_i9.WeatherRemoteDataSource>(),
-      get<_i6.NetworkInfo>(),
-      get<_i3.Configuration>()));
-  gh.lazySingleton<_i12.GetWeatherDataUseCase>(
-      () => _i12.GetWeatherDataUseCase(get<_i10.WeatherRepository>()));
-  gh.factory<_i13.WeatherDataBloc>(
-      () => _i13.WeatherDataBloc(get<_i12.GetWeatherDataUseCase>()));
+  gh.lazySingleton<_i11.WeatherRepository>(() => _i12.WeatherRepositoryImpl(
+      get<_i10.WeatherRemoteDataSource>(),
+      get<_i7.NetworkInfo>(),
+      get<_i3.Configuration>(),
+      get<_i6.Logger>()));
+  gh.lazySingleton<_i13.GetWeatherDataUseCase>(
+      () => _i13.GetWeatherDataUseCase(get<_i11.WeatherRepository>()));
+  gh.factory<_i14.WeatherDataBloc>(
+      () => _i14.WeatherDataBloc(get<_i13.GetWeatherDataUseCase>()));
   return get;
 }
 
-class _$InjectableModule extends _i14.InjectableModule {}
+class _$InjectableModule extends _i15.InjectableModule {}

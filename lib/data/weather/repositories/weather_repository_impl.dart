@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:weather_app/data/core/utils/configuration.dart';
 import 'package:weather_app/data/weather/data_sources/remote/weather_remote_data_source.dart';
 import 'package:weather_app/data/weather/models/weather_response/weather_response_model.dart';
@@ -14,8 +16,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final WeatherRemoteDataSource remote;
   final NetworkInfo networkInfo;
   final Configuration configuration;
+  final Logger logger;
 
-  WeatherRepositoryImpl(this.remote, this.networkInfo, this.configuration);
+  WeatherRepositoryImpl(this.remote, this.networkInfo, this.configuration, this.logger);
 
   @override
   Future<Either<Failure, WeatherResponse>> getWeatherData() async {
@@ -27,8 +30,9 @@ class WeatherRepositoryImpl implements WeatherRepository {
     try {
       final response =
           await remote.getWeatherData(apiKey: configuration.apiKey);
-      return right(response.toDomain());
+      return right(response.toDomain(configuration.imageUrl));
     } catch (e) {
+      logger.e(e);
       return left(ServerFailure(errorCode: ServerErrorCode.serverError));
     }
   }

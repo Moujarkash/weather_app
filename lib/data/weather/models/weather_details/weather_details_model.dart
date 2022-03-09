@@ -16,5 +16,5 @@ class WeatherDetailsModel {
 }
 
 extension MapToDomain on WeatherDetailsModel {
-  WeatherDetails toDomain() => WeatherDetails(main, description, icon);
+  WeatherDetails toDomain(String imageUrl) => WeatherDetails(main, description, '$imageUrl$icon@2x.png');
 }

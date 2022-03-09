@@ -28,6 +28,6 @@ class WeatherDataModel {
 }
 
 extension MapToDomain on WeatherDataModel {
-  WeatherData toDomain() => WeatherData(date, weatherMainInfo.toDomain(),
-      wind.toDomain(), details.map((e) => e.toDomain()).toList(), dateText);
+  WeatherData toDomain(String imageUrl) => WeatherData(date, weatherMainInfo.toDomain(),
+      wind.toDomain(), details.map((e) => e.toDomain(imageUrl)).toList(), dateText);
 }

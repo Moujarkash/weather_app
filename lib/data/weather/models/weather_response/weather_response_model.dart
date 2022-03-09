@@ -18,6 +18,6 @@ class WeatherResponseModel {
 }
 
 extension MapToDomain on WeatherResponseModel {
-  WeatherResponse toDomain() => WeatherResponse(
-      weatherData.map((e) => e.toDomain()).toList(), city.toDomain());
+  WeatherResponse toDomain(String imageUrl) => WeatherResponse(
+      weatherData.map((e) => e.toDomain(imageUrl)).toList(), city.toDomain());
 }

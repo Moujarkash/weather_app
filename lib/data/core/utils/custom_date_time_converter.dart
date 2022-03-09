@@ -5,7 +5,7 @@ class CustomDateTimeConverter implements JsonConverter<DateTime, int> {
 
   @override
   DateTime fromJson(int json) {
-    return DateTime.fromMillisecondsSinceEpoch(json * 1000);
+    return DateTime.fromMillisecondsSinceEpoch(json * 1000).toLocal();
   }
 
   @override

@@ -6,6 +6,8 @@ class City {
   final Coordinate coordinate;
   final String country;
   final int timezone;
+  final DateTime sunrise;
+  final DateTime sunset;
 
-  City(this.id, this.name, this.coordinate, this.country, this.timezone);
+  City(this.id, this.name, this.coordinate, this.country, this.timezone, this.sunrise, this.sunset);
 }

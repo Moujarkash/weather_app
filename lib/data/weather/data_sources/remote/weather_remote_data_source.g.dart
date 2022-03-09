@@ -17,9 +17,13 @@ class _WeatherRemoteDataSourceImpl implements WeatherRemoteDataSourceImpl {
 
   @override
   Future<WeatherResponseModel> getWeatherData(
-      {id = 292223, required apiKey}) async {
+      {id = 292223, required apiKey, units = 'metric'}) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': id, r'appid': apiKey};
+    final queryParameters = <String, dynamic>{
+      r'id': id,
+      r'appid': apiKey,
+      r'units': units
+    };
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

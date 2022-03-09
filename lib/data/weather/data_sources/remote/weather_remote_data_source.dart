@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 part 'weather_remote_data_source.g.dart';
 
 abstract class WeatherRemoteDataSource {
-  Future<WeatherResponseModel> getWeatherData({int id, required String apiKey});
+  Future<WeatherResponseModel> getWeatherData({int id, required String apiKey, String units});
 }
 
 @LazySingleton(as: WeatherRemoteDataSource)
@@ -22,6 +22,7 @@ abstract class WeatherRemoteDataSourceImpl implements WeatherRemoteDataSource {
   @GET('/data/2.5/forecast')
   Future<WeatherResponseModel> getWeatherData({
     @Query('id') int id = 292223, 
-    @Query('appid') required String apiKey
+    @Query('appid') required String apiKey,
+    @Query('units') String units = 'metric'
   });
 }
