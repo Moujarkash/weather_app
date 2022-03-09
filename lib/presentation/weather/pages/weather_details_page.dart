@@ -168,5 +168,14 @@ class WeatherDetailsPage extends StatelessWidget {
     return path;
   }
 
-  bool get _isDay => date.isAfter(city.sunrise) && date.isBefore(city.sunset);
+  bool get _isDay {
+    final currentDate = DateTime(
+        date.year, date.month, date.day, date.hour, date.minute, date.second);
+    final sunriseDate = DateTime(date.year, date.month, date.day,
+        city.sunrise.hour, city.sunrise.minute, city.sunrise.second);
+    final sunsetDate = DateTime(date.year, date.month, date.day,
+        city.sunset.hour, city.sunset.minute, city.sunset.second);
+
+    return currentDate.isAfter(sunriseDate) && currentDate.isBefore(sunsetDate);
+  }
 }
