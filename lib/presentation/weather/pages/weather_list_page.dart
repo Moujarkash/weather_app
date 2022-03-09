@@ -82,8 +82,8 @@ class _WeatherListPageState extends State<WeatherListPage> {
                               onTap: () {
                                 AutoRouter.of(context).push(
                                     WeatherDetailsPageRoute(
-                                        weatherDetails: weatherDetails,
-                                        city: weatherResponse.city));
+                                        weatherData: weatherData,
+                                        city: weatherResponse.city, date: weatherData.date));
                               },
                             );
                           },

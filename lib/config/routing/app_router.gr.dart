@@ -27,8 +27,9 @@ class _$AppRouter extends RootStackRouter {
           routeData: routeData,
           child: WeatherDetailsPage(
               key: args.key,
-              weatherDetails: args.weatherDetails,
-              city: args.city));
+              weatherData: args.weatherData,
+              city: args.city,
+              date: args.date));
     }
   };
 
@@ -52,27 +53,35 @@ class WeatherListPageRoute extends PageRouteInfo<void> {
 class WeatherDetailsPageRoute
     extends PageRouteInfo<WeatherDetailsPageRouteArgs> {
   WeatherDetailsPageRoute(
-      {Key? key, required WeatherDetails weatherDetails, required City city})
+      {Key? key,
+      required WeatherData weatherData,
+      required City city,
+      required DateTime date})
       : super(WeatherDetailsPageRoute.name,
             path: '/weather-details-page',
             args: WeatherDetailsPageRouteArgs(
-                key: key, weatherDetails: weatherDetails, city: city));
+                key: key, weatherData: weatherData, city: city, date: date));
 
   static const String name = 'WeatherDetailsPageRoute';
 }
 
 class WeatherDetailsPageRouteArgs {
   const WeatherDetailsPageRouteArgs(
-      {this.key, required this.weatherDetails, required this.city});
+      {this.key,
+      required this.weatherData,
+      required this.city,
+      required this.date});
 
   final Key? key;
 
-  final WeatherDetails weatherDetails;
+  final WeatherData weatherData;
 
   final City city;
 
+  final DateTime date;
+
   @override
   String toString() {
-    return 'WeatherDetailsPageRouteArgs{key: $key, weatherDetails: $weatherDetails, city: $city}';
+    return 'WeatherDetailsPageRouteArgs{key: $key, weatherData: $weatherData, city: $city, date: $date}';
   }
 }
