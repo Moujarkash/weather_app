@@ -11,3 +11,10 @@ WeatherMainInfoModel _$WeatherMainInfoModelFromJson(Map json) =>
       (json['temp'] as num).toDouble(),
       (json['humidity'] as num).toDouble(),
     );
+
+Map<String, dynamic> _$WeatherMainInfoModelToJson(
+        WeatherMainInfoModel instance) =>
+    <String, dynamic>{
+      'temp': instance.temp,
+      'humidity': instance.humidity,
+    };

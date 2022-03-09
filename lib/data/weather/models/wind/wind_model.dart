@@ -11,6 +11,8 @@ class WindModel {
 
   factory WindModel.fromJson(Map<String, dynamic> json) =>
       _$WindModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WindModelToJson(this);
 }
 
 extension MapToDomain on WindModel {

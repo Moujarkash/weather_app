@@ -17,12 +17,16 @@ class CityModel {
   final DateTime sunrise;
   final DateTime sunset;
 
-  CityModel(this.id, this.name, this.coordinate, this.country, this.timezone, this.sunrise, this.sunset);
+  CityModel(this.id, this.name, this.coordinate, this.country, this.timezone,
+      this.sunrise, this.sunset);
 
   factory CityModel.fromJson(Map<String, dynamic> json) =>
       _$CityModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CityModelToJson(this);
 }
 
 extension MapToDomain on CityModel {
-  City toDomain() => City(id, name, coordinate.toDomain(), country, timezone, sunrise, sunset);
+  City toDomain() =>
+      City(id, name, coordinate.toDomain(), country, timezone, sunrise, sunset);
 }

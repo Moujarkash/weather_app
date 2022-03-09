@@ -13,6 +13,8 @@ class CoordinateModel {
 
   factory CoordinateModel.fromJson(Map<String, dynamic> json) =>
       _$CoordinateModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CoordinateModelToJson(this);
 }
 
 extension MapToDomain on CoordinateModel {

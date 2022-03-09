@@ -17,3 +17,20 @@ WeatherDataModel _$WeatherDataModelFromJson(Map json) => WeatherDataModel(
           .toList(),
       json['dt_txt'] as String,
     );
+
+Map<String, dynamic> _$WeatherDataModelToJson(WeatherDataModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('dt', const CustomDateTimeConverter().toJson(instance.date));
+  val['main'] = instance.weatherMainInfo.toJson();
+  val['wind'] = instance.wind.toJson();
+  val['weather'] = instance.details.map((e) => e.toJson()).toList();
+  val['dt_txt'] = instance.dateText;
+  return val;
+}

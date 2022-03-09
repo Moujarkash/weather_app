@@ -10,3 +10,9 @@ CoordinateModel _$CoordinateModelFromJson(Map json) => CoordinateModel(
       (json['lat'] as num).toDouble(),
       (json['lon'] as num).toDouble(),
     );
+
+Map<String, dynamic> _$CoordinateModelToJson(CoordinateModel instance) =>
+    <String, dynamic>{
+      'lat': instance.lat,
+      'lon': instance.lng,
+    };

@@ -9,3 +9,7 @@ part of 'wind_model.dart';
 WindModel _$WindModelFromJson(Map json) => WindModel(
       (json['speed'] as num).toDouble(),
     );
+
+Map<String, dynamic> _$WindModelToJson(WindModel instance) => <String, dynamic>{
+      'speed': instance.speed,
+    };

@@ -25,9 +25,15 @@ class WeatherDataModel {
 
   factory WeatherDataModel.fromJson(Map<String, dynamic> json) =>
       _$WeatherDataModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WeatherDataModelToJson(this);
 }
 
 extension MapToDomain on WeatherDataModel {
-  WeatherData toDomain(String imageUrl) => WeatherData(date, weatherMainInfo.toDomain(),
-      wind.toDomain(), details.map((e) => e.toDomain(imageUrl)).toList(), dateText);
+  WeatherData toDomain(String imageUrl) => WeatherData(
+      date,
+      weatherMainInfo.toDomain(),
+      wind.toDomain(),
+      details.map((e) => e.toDomain(imageUrl)).toList(),
+      dateText);
 }

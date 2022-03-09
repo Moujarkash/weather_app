@@ -15,6 +15,8 @@ class WeatherResponseModel {
 
   factory WeatherResponseModel.fromJson(Map<String, dynamic> json) =>
       _$WeatherResponseModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WeatherResponseModelToJson(this);
 }
 
 extension MapToDomain on WeatherResponseModel {

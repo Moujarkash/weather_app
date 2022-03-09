@@ -15,3 +15,25 @@ CityModel _$CityModelFromJson(Map json) => CityModel(
       const CustomDateTimeConverter().fromJson(json['sunrise'] as int),
       const CustomDateTimeConverter().fromJson(json['sunset'] as int),
     );
+
+Map<String, dynamic> _$CityModelToJson(CityModel instance) {
+  final val = <String, dynamic>{
+    'id': instance.id,
+    'name': instance.name,
+    'coord': instance.coordinate.toJson(),
+    'country': instance.country,
+    'timezone': instance.timezone,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'sunrise', const CustomDateTimeConverter().toJson(instance.sunrise));
+  writeNotNull(
+      'sunset', const CustomDateTimeConverter().toJson(instance.sunset));
+  return val;
+}

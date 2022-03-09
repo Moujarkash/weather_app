@@ -13,6 +13,14 @@ WeatherDetailsModel _$WeatherDetailsModelFromJson(Map json) =>
       json['icon'] as String,
     );
 
+Map<String, dynamic> _$WeatherDetailsModelToJson(
+        WeatherDetailsModel instance) =>
+    <String, dynamic>{
+      'main': _$WeatherConditionModelEnumMap[instance.weatherCondition],
+      'description': instance.description,
+      'icon': instance.icon,
+    };
+
 const _$WeatherConditionModelEnumMap = {
   WeatherConditionModel.thunderstorm: 'Thunderstorm',
   WeatherConditionModel.drizzle: 'Drizzle',
